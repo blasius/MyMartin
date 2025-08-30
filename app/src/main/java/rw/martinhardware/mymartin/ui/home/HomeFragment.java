@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +23,7 @@ import rw.martinhardware.mymartin.adapters.VehicleAdapter;
 import rw.martinhardware.mymartin.databinding.FragmentHomeBinding;
 import rw.martinhardware.mymartin.db.AppDatabase;
 import rw.martinhardware.mymartin.entities.Vehicle;
+import rw.martinhardware.mymartin.utils.SyncUtils;
 
 public class HomeFragment extends Fragment {
 
@@ -38,6 +41,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView rv = view.findViewById(R.id.rvVehicles);
+        TextView tvLastSync = view.findViewById(R.id.tvLastSync);
+
         VehicleAdapter adapter = new VehicleAdapter();
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
         rv.setAdapter(adapter);
@@ -45,7 +50,7 @@ public class HomeFragment extends Fragment {
         AppDatabase db = AppDatabase.getInstance(requireContext());
 
         new Thread(() -> {
-            // Insert a test vehicle (optional, for first run)
+            // Insert a test vehicle if DB empty
             if (db.vehicleDao().getAllVehicles().isEmpty()) {
                 Vehicle v = new Vehicle();
                 v.setUuid(UUID.randomUUID().toString());
@@ -55,16 +60,27 @@ public class HomeFragment extends Fragment {
                 v.setNotes("Test car");
                 v.setUpdatedAt(System.currentTimeMillis());
                 db.vehicleDao().insert(v);
+
+                // pretend we just synced
+                SyncUtils.saveLastSync(requireContext(), System.currentTimeMillis());
             }
 
             List<Vehicle> list = db.vehicleDao().getAllVehicles();
+            long lastSync = SyncUtils.getLastSync(requireContext());
 
             requireActivity().runOnUiThread(() -> {
                 adapter.setVehicles(list);
+
+                if (lastSync == 0) {
+                    tvLastSync.setText("Last synced: never");
+                } else {
+                    Date date = new Date(lastSync);
+                    DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
+                    tvLastSync.setText("Last synced: " + df.format(date));
+                }
             });
         }).start();
     }
-
 
     @Override
     public void onDestroyView() {

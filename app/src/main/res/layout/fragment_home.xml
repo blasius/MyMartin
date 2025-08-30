@@ -12,6 +12,15 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/tvLastSync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last synced: never"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvVehicles"
             android:layout_width="match_parent"
