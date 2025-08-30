@@ -1,0 +1,15 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    // This plugin applies the Android Application plugin to sub-projects, but does not apply it to this file.
+    alias(libs.plugins.android.application) apply false
+    // You should declare other plugins here with apply false if they are applied to sub-modules.
+}
+
+// Define the GreenDAO version as an extra property for easy management.
+// This is a common practice to keep dependencies centralized.
+ext.greendao_version = '3.3.0'
+
+// Task to clean the project build output.
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}
