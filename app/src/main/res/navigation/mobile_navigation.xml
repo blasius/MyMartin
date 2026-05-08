@@ -3,23 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="rw.martinhardware.mymartin.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@+id/navigation_dashboard">
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="rw.martinhardware.mymartin.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="rw.martinhardware.mymartin.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_trips"
+        android:name="rw.martinhardware.mymartin.ui.trips.TripsFragment"
+        android:label="Trips"
+        tools:layout="@layout/fragment_trips" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="rw.martinhardware.mymartin.ui.map.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/navigation_compliance"
+        android:name="rw.martinhardware.mymartin.ui.compliance.ComplianceFragment"
+        android:label="Compliance"
+        tools:layout="@layout/fragment_compliance" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="rw.martinhardware.mymartin.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

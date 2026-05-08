@@ -2,4 +2,5 @@
 plugins {
     // This plugin applies the Android Application plugin to sub-projects, but does not apply it to this file.
     alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.objectbox) apply false
 }

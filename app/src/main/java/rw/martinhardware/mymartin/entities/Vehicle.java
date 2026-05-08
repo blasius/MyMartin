@@ -1,12 +1,7 @@
 package rw.martinhardware.mymartin.entities;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "vehicles")
 public class Vehicle {
 
-    @PrimaryKey(autoGenerate = true)
     private Long id;
 
     private String uuid; // unique ID from backend

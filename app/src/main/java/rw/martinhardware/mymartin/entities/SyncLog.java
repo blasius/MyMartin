@@ -1,12 +1,7 @@
 package rw.martinhardware.mymartin.entities;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "sync_log")
 public class SyncLog {
 
-    @PrimaryKey(autoGenerate = true)
     private Long id;
 
     private long lastSyncTime; // epoch millis
