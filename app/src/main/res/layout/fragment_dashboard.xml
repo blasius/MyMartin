@@ -99,7 +99,7 @@
                         android:text="5"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@color/design_default_color_primary" />
+                        android:textColor="@color/theme_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
                         android:text="3"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/holo_green_dark" />
+                        android:textColor="@color/theme_accent" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
                         android:text="98%"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/holo_orange_dark" />
+                        android:textColor="@color/theme_secondary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -228,7 +228,7 @@
                     android:text="ON_ROUTE"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/holo_blue_dark"
+                    android:textColor="@color/theme_accent"
                     android:background="@drawable/status_badge_background"
                     android:padding="4dp"
                     app:layout_constraintEnd_toEndOf="parent"

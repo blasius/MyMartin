@@ -26,7 +26,7 @@ public class DashboardViewModel extends ViewModel {
 
     private void loadDashboardData() {
         // Mock data - in real app, this would come from API/database
-        driverName.setValue("John Driver");
+        driverName.setValue("John Kaigarula");
         tripsCount.setValue(5);
         completedCount.setValue(3);
         complianceScore.setValue(98);

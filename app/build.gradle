@@ -51,6 +51,9 @@ dependencies {
     implementation libs.objectbox.android
     implementation libs.objectbox.kotlin
     annotationProcessor libs.objectbox.processor
+
+    // Volley for API calls
+    implementation libs.volley
 }
 
 java {
