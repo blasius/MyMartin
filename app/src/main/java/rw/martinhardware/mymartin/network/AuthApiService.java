@@ -1,6 +1,7 @@
 package rw.martinhardware.mymartin.network;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -45,6 +46,7 @@ public class AuthApiService {
         try {
             requestBody.put("phone_number", phoneNumber);
         } catch (JSONException e) {
+            Log.e("AuthApiService", "Failed to create request body", e);
             callback.onError("Failed to create request: " + e.getMessage());
             return;
         }

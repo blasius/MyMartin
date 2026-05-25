@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme Colors -->
-    <color name="theme_primary">#E9EC3C</color>
+    <color name="theme_primary">#E2F13C</color>
     <color name="theme_secondary">#231F20</color>
-    <color name="theme_accent">#DC3534</color>
-    <color name="theme_background">#FFFFFF</color>
+    <color name="theme_accent">#E61C24</color>
+    <color name="theme_background">#111215</color>
     
     <!-- Material Design Color Mapping -->
     <color name="colorPrimary">@color/theme_primary</color>

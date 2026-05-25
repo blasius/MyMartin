@@ -2,6 +2,7 @@ package rw.martinhardware.mymartin.auth;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,9 @@ public class WhatsAppLoginFragment extends Fragment {
         // Observe errors
         authViewModel.getErrorMessage().observe(getViewLifecycleOwner(), errorMessage -> {
             if (errorMessage != null) {
-                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                Log.e("Darling: ", errorMessage);
+                Log.e("Darling: ", errorMessage);
+                Toast.makeText(getContext(), "This:" + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
 

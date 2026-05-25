@@ -52,7 +52,7 @@
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusTopStart="12dp"
             app:boxStrokeColor="@color/auth_accent"
-            app:hintTextColor="@color/auth_accent"
+            app:hintTextColor="@color/black"
             app:prefixText="+250 "
             android:hint="Phone Number">
 
@@ -60,6 +60,7 @@
                 android:id="@+id/et_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:inputType="phone"
                 android:maxLines="1" />
 
@@ -74,6 +75,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:cornerRadius="12dp"
+            android:textColor="@color/white"
             app:backgroundTint="@color/auth_accent"
             android:layout_marginBottom="16dp" />
 

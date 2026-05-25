@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import rw.martinhardware.mymartin.R;
 
 public class DeliveryDetailsActivity extends AppCompatActivity {
@@ -25,14 +24,6 @@ public class DeliveryDetailsActivity extends AppCompatActivity {
 
         // Initialize views
         initViews();
-        
-        // Setup toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Delivery Details");
-        }
 
         // Get delivery data
         String deliveryId = getIntent().getStringExtra("delivery_id");
