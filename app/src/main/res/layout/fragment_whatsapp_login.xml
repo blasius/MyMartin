@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Back Button -->
         <ImageButton
             android:id="@+id/btn_back"
             android:layout_width="48dp"
@@ -23,7 +22,6 @@
             android:contentDescription="Back"
             android:tint="@color/auth_primary_text" />
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,8 +39,8 @@
             android:textColor="@color/auth_secondary_text"
             android:layout_marginBottom="48dp" />
 
-        <!-- Phone Input -->
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -66,7 +64,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Request OTP Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_request_otp"
             android:layout_width="match_parent"
@@ -77,9 +74,79 @@
             app:cornerRadius="12dp"
             android:textColor="@color/white"
             app:backgroundTint="@color/auth_accent"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="24dp" />
 
-        <!-- Progress Bar -->
+        <TextView
+            android:id="@+id/tv_otp_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter the code sent to your WhatsApp"
+            android:textSize="16sp"
+            android:textColor="@color/auth_secondary_text"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_phone_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/auth_accent"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxStrokeColor="@color/auth_accent"
+            app:hintTextColor="@color/auth_accent"
+            android:hint="Enter OTP">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_otp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLines="1"
+                android:maxLength="6"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_verify"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Verify OTP"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/auth_accent"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_resend"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Resend OTP"
+            android:textSize="16sp"
+            app:cornerRadius="12dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            app:strokeColor="@color/auth_accent"
+            android:textColor="@color/auth_accent"
+            android:visibility="gone" />
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"

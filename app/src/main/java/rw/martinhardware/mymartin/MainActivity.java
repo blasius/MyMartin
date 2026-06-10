@@ -11,11 +11,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import io.objectbox.Box;
 import io.objectbox.BoxStore;
 import rw.martinhardware.mymartin.auth.AuthActivity;
-import rw.martinhardware.mymartin.dao.UserDao;
 import rw.martinhardware.mymartin.databinding.ActivityMainBinding;
 import rw.martinhardware.mymartin.entities.User;
+import rw.martinhardware.mymartin.entities.User_;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Check authentication status
         if (!isUserAuthenticated()) {
             navigateToAuth();
             return;
@@ -35,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_dashboard, R.id.navigation_trips, R.id.navigation_map,
-                R.id.navigation_compliance, R.id.navigation_profile)
+                R.id.navigation_home, R.id.navigation_notifications,
+                R.id.navigation_profile, R.id.navigation_support)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -49,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean isUserAuthenticated() {
         try {
             BoxStore boxStore = ((MyApp) getApplication()).getBoxStore();
-            UserDao userDao = new UserDao(boxStore);
-            User activeUser = userDao.getActiveUser();
-            return activeUser != null && activeUser.isTokenValid();
+            Box<User> userBox = boxStore.boxFor(User.class);
+            User active = userBox.query().equal(User_.isActive, true).build().findFirst();
+            return active != null && active.isTokenValid();
         } catch (Exception e) {
             return false;
         }
@@ -63,5 +61,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 }

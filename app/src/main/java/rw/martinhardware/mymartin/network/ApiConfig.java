@@ -5,7 +5,7 @@ import rw.martinhardware.mymartin.BuildConfig;
 public class ApiConfig {
     // Environment URLs
     //private static final String DEV_BASE_URL = "https://martin-logistics.test/api";
-    private static final String DEV_BASE_URL = "https://192.168.1.70:8000/api";
+    private static final String DEV_BASE_URL = "http://192.168.100.156:8000/api";
     private static final String PROD_BASE_URL = "https://martin-logistics.nova.bi/api";
 
     // Automatically select base URL based on build type

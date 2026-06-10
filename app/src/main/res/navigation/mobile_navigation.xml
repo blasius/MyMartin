@@ -3,35 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    app:startDestination="@id/navigation_home">
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="rw.martinhardware.mymartin.ui.dashboard.DashboardFragment"
-        android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_home"
+        android:name="rw.martinhardware.mymartin.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_trips"
-        android:name="rw.martinhardware.mymartin.ui.trips.TripsFragment"
-        android:label="Trips"
-        tools:layout="@layout/fragment_trips" />
-
-    <fragment
-        android:id="@+id/navigation_map"
-        android:name="rw.martinhardware.mymartin.ui.map.MapFragment"
-        android:label="Map"
-        tools:layout="@layout/fragment_map" />
-
-    <fragment
-        android:id="@+id/navigation_compliance"
-        android:name="rw.martinhardware.mymartin.ui.compliance.ComplianceFragment"
-        android:label="Compliance"
-        tools:layout="@layout/fragment_compliance" />
+        android:id="@+id/navigation_notifications"
+        android:name="rw.martinhardware.mymartin.ui.notifications.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="rw.martinhardware.mymartin.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_support"
+        android:name="rw.martinhardware.mymartin.ui.support.SupportFragment"
+        android:label="Support"
+        tools:layout="@layout/fragment_support" />
+
 </navigation>
