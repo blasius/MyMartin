@@ -33,6 +33,12 @@
             android:exported="false">
         </activity>
 
+        <activity
+            android:name=".ui.support.TicketDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
     </application>
 
 </manifest>
