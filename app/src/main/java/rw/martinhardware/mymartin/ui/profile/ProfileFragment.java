@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
 
         authViewModel = new ViewModelProvider(requireActivity()).get(AuthViewModel.class);
 
-        binding.llLogout.setOnClickListener(v -> logout());
+        binding.llLogout.setOnClickListener(v -> showLogoutConfirmation());
 
         authViewModel.getAuthState().observe(getViewLifecycleOwner(), state -> {
             if (state == AuthViewModel.AuthState.NOT_AUTHENTICATED) {
@@ -69,6 +69,15 @@ public class ProfileFragment extends Fragment {
         } catch (Exception e) {
             Toast.makeText(getContext(), "Failed to load profile", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void showLogoutConfirmation() {
+        new android.app.AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Logout", (dialog, which) -> logout())
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void logout() {
