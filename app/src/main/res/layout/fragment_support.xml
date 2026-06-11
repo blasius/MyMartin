@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/md3_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,12 +12,12 @@
 
         <ProgressBar
             android:id="@+id/progress_bar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_gravity="center"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="64dp"
             android:visibility="gone"
-            android:indeterminateTint="@color/theme_accent" />
+            android:indeterminateTint="@color/md3_primary" />
 
         <LinearLayout
             android:id="@+id/empty_state"
@@ -24,7 +25,25 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
+            android:padding="32dp"
             android:visibility="visible">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/md3_primary_container">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_support"
+                    app:tint="@color/md3_primary"
+                    android:contentDescription="Support" />
+
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/tv_empty"
@@ -32,8 +51,9 @@
                 android:layout_height="wrap_content"
                 android:text="No support tickets yet"
                 android:textSize="16sp"
-                android:textColor="#757575"
-                android:gravity="center" />
+                android:textColor="@color/md3_on_surface_variant"
+                android:gravity="center"
+                android:layout_marginTop="20dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_create_from_empty"
@@ -42,8 +62,7 @@
                 android:text="Create Ticket"
                 android:layout_marginTop="24dp"
                 app:cornerRadius="8dp"
-                app:backgroundTint="@color/theme_accent"
-                android:visibility="visible" />
+                app:backgroundTint="@color/md3_primary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_retry"
@@ -51,7 +70,10 @@
                 android:layout_height="wrap_content"
                 android:text="Retry"
                 android:visibility="gone"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="12dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:strokeColor="@color/md3_primary"
+                android:textColor="@color/md3_primary" />
 
         </LinearLayout>
 
@@ -59,11 +81,11 @@
             android:id="@+id/btn_create_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+ New Ticket"
+            android:text="New Ticket"
             android:visibility="gone"
             app:cornerRadius="0dp"
-            app:backgroundTint="@color/theme_accent"
-            android:textColor="@android:color/white"
+            app:backgroundTint="@color/md3_primary"
+            android:textColor="@color/md3_on_primary"
             android:textStyle="bold"
             android:padding="12dp" />
 
@@ -73,6 +95,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingTop="4dp"
+            android:paddingHorizontal="12dp"
             android:paddingBottom="88dp"
             android:visibility="gone" />
 
@@ -86,8 +109,8 @@
         android:layout_margin="20dp"
         android:src="@drawable/ic_add"
         android:contentDescription="Create ticket"
-        app:backgroundTint="@color/theme_accent"
-        app:tint="@android:color/white"
+        app:backgroundTint="@color/md3_primary"
+        app:tint="@color/md3_on_primary"
         app:fabSize="normal" />
 
 </FrameLayout>

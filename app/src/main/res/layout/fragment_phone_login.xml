@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@color/auth_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +12,6 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Back Button -->
         <ImageButton
             android:id="@+id/btn_back"
             android:layout_width="48dp"
@@ -21,9 +21,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back"
             android:contentDescription="Back"
-            android:tint="@color/auth_primary_text" />
+            app:tint="@color/auth_primary_text" />
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +40,6 @@
             android:textColor="@color/auth_secondary_text"
             android:layout_marginBottom="48dp" />
 
-        <!-- Phone Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +63,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Verify Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_verify_phone"
             android:layout_width="match_parent"
@@ -77,7 +74,6 @@
             app:backgroundTint="@color/auth_accent"
             android:layout_marginBottom="16dp" />
 
-        <!-- Progress Bar -->
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"

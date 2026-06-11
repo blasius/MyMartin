@@ -3,39 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5DDD5">
+    android:background="@color/md3_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Profile Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#075E54"
-            android:padding="24dp"
-            android:elevation="4dp">
+            android:background="@color/md3_primary"
+            android:padding="32dp"
+            android:gravity="center">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@android:drawable/ic_menu_myplaces"
-                android:background="@android:color/white"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_person_black_24dp"
+                android:background="@color/md3_on_primary"
                 android:padding="16dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                app:tint="@color/md3_primary" />
 
             <TextView
                 android:id="@+id/tv_driver_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="John Driver"
-                android:textSize="20sp"
+                android:text="Driver"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"
+                android:textColor="@color/md3_on_primary"
                 android:gravity="center"
                 android:layout_marginBottom="4dp" />
 
@@ -43,102 +43,109 @@
                 android:id="@+id/tv_driver_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ID: DRV001"
+                android:text=""
                 android:textSize="14sp"
-                android:textColor="#E5DDD5"
+                android:textColor="#B0C4DE"
                 android:gravity="center" />
 
         </LinearLayout>
 
-        <!-- Driver Information -->
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@android:color/white"
             android:layout_margin="16dp"
-            android:padding="16dp"
-            android:elevation="2dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Driver Information"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#075E54"
-                android:layout_marginBottom="16dp" />
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="@color/md3_surface">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Phone Number"
-                    android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:text="Contact"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/md3_primary"
+                    android:layout_marginBottom="16dp" />
 
-                <TextView
-                    android:id="@+id/tv_phone_number"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+250 788 999 000"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Phone"
+                        android:textSize="14sp"
+                        android:textColor="@color/md3_on_surface_variant" />
+
+                    <TextView
+                        android:id="@+id/tv_phone_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="14sp"
+                        android:textColor="@color/md3_on_surface"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_vehicle_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Vehicle"
+                        android:textSize="14sp"
+                        android:textColor="@color/md3_on_surface_variant" />
+
+                    <TextView
+                        android:id="@+id/tv_vehicle_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="14sp"
+                        android:textColor="@color/md3_on_surface" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_vehicle_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+        </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Vehicle Number"
-                    android:textSize="14sp"
-                    android:textColor="#757575" />
-
-                <TextView
-                    android:id="@+id/tv_vehicle_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="RAA 123A"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!-- Delivery Statistics -->
         <LinearLayout
             android:id="@+id/ll_delivery_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@android:color/white"
+            android:background="@color/md3_surface"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
             android:padding="16dp"
-            android:elevation="2dp">
+            android:elevation="1dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Delivery Statistics"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#075E54"
+                android:textColor="@color/md3_primary"
                 android:layout_marginBottom="16dp" />
 
             <LinearLayout
@@ -158,17 +165,17 @@
                         android:id="@+id/tv_total_deliveries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="156"
+                        android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="#075E54" />
+                        android:textColor="@color/md3_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total"
                         android:textSize="12sp"
-                        android:textColor="#757575" />
+                        android:textColor="@color/md3_on_surface_variant" />
 
                 </LinearLayout>
 
@@ -184,17 +191,17 @@
                         android:id="@+id/tv_completed_deliveries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="142"
+                        android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="#4CAF50" />
+                        android:textColor="@color/md3_tertiary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Completed"
                         android:textSize="12sp"
-                        android:textColor="#757575" />
+                        android:textColor="@color/md3_on_surface_variant" />
 
                 </LinearLayout>
 
@@ -210,17 +217,17 @@
                         android:id="@+id/tv_pending_deliveries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="14"
+                        android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="#FF9800" />
+                        android:textColor="@color/md3_secondary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pending"
                         android:textSize="12sp"
-                        android:textColor="#757575" />
+                        android:textColor="@color/md3_on_surface_variant" />
 
                 </LinearLayout>
 
@@ -228,114 +235,107 @@
 
         </LinearLayout>
 
-        <!-- Settings Options -->
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@android:color/white"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            android:elevation="2dp">
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="@color/md3_surface">
 
             <LinearLayout
-                android:id="@+id/ll_edit_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_edit"
-                    android:layout_marginEnd="16dp" />
-
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/ll_edit_profile"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Edit Profile"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black" />
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:visibility="gone">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_more" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Edit Profile"
+                        android:textSize="16sp"
+                        android:textColor="@color/md3_on_surface" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/md3_on_surface_variant" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/md3_outline_variant" />
+
+                <LinearLayout
+                    android:id="@+id/ll_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Settings"
+                        android:textSize="16sp"
+                        android:textColor="@color/md3_on_surface" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/md3_on_surface_variant" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/md3_outline_variant" />
+
+                <LinearLayout
+                    android:id="@+id/ll_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Logout"
+                        android:textSize="16sp"
+                        android:textColor="@color/md3_error" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/md3_on_surface_variant" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0" />
-
-            <LinearLayout
-                android:id="@+id/ll_settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_preferences"
-                    android:layout_marginEnd="16dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Settings"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_more" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0" />
-
-            <LinearLayout
-                android:id="@+id/ll_logout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_close_clear_cancel"
-                    android:layout_marginEnd="16dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Logout"
-                    android:textSize="16sp"
-                    android:textColor="#F44336" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_more" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

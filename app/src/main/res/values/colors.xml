@@ -1,22 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Theme Colors -->
-    <color name="theme_primary">#E2F13C</color>
-    <color name="theme_secondary">#231F20</color>
-    <color name="theme_accent">#E61C24</color>
-    <color name="theme_background">#111215</color>
-    
-    <!-- Material Design Color Mapping -->
-    <color name="colorPrimary">@color/theme_primary</color>
-    <color name="colorPrimaryDark">@color/theme_secondary</color>
-    <color name="colorAccent">@color/theme_accent</color>
-    
-    <!-- Standard Colors -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    
-    <!-- Additional Theme Variants -->
-    <color name="theme_primary_light">#F5F76D</color>
-    <color name="theme_secondary_light">#4A4546</color>
-    <color name="theme_accent_light">#E85756</color>
+    <color name="md3_primary">#0F2B4A</color>
+    <color name="md3_on_primary">#FFFFFF</color>
+    <color name="md3_primary_container">#D4E3FF</color>
+    <color name="md3_on_primary_container">#001B3D</color>
+
+    <color name="md3_secondary">#F59E0B</color>
+    <color name="md3_on_secondary">#1A1A1A</color>
+    <color name="md3_secondary_container">#FFEFCF</color>
+    <color name="md3_on_secondary_container">#2B1A00</color>
+
+    <color name="md3_tertiary">#2E7D6F</color>
+    <color name="md3_on_tertiary">#FFFFFF</color>
+
+    <color name="md3_background">#F5F7FA</color>
+    <color name="md3_on_background">#1A1A1A</color>
+
+    <color name="md3_surface">#FFFFFF</color>
+    <color name="md3_on_surface">#1A1A1A</color>
+    <color name="md3_surface_variant">#F0F2F5</color>
+    <color name="md3_on_surface_variant">#6B7280</color>
+
+    <color name="md3_outline">#D1D5DB</color>
+    <color name="md3_outline_variant">#E5E7EB</color>
+
+    <color name="md3_error">#DC2626</color>
+    <color name="md3_on_error">#FFFFFF</color>
+    <color name="md3_error_container">#FEE2E2</color>
+
+    <!-- Theme Aliases (backward compat) -->
+    <color name="theme_primary">@color/md3_primary</color>
+    <color name="theme_on_primary">@color/md3_on_primary</color>
+    <color name="theme_primary_container">@color/md3_primary_container</color>
+
+    <color name="theme_secondary">@color/md3_secondary</color>
+    <color name="theme_on_secondary">@color/md3_on_secondary</color>
+    <color name="theme_secondary_container">@color/md3_secondary_container</color>
+
+    <color name="theme_accent">@color/md3_secondary</color>
+    <color name="theme_accent_light">@color/md3_secondary_container</color>
+
+    <color name="theme_background">@color/md3_background</color>
+    <color name="theme_surface">@color/md3_surface</color>
+    <color name="theme_surface_variant">@color/md3_surface_variant</color>
+    <color name="theme_on_surface_variant">@color/md3_on_surface_variant</color>
+    <color name="theme_outline">@color/md3_outline</color>
+
+    <color name="theme_error">@color/md3_error</color>
+
+    <!-- Legacy aliases -->
+    <color name="theme_primary_light">@color/md3_primary_container</color>
+    <color name="theme_secondary_light">@color/md3_on_surface_variant</color>
 </resources>

@@ -50,6 +50,8 @@ public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdap
         String priority = t.getPriority() != null ? t.getPriority().toUpperCase(Locale.ROOT) : "";
         h.tvPriority.setText(priority);
         h.tvDate.setText(t.getCreatedAt());
+        Ticket.Category cat = t.getCategory();
+        h.tvCategory.setText(cat != null ? cat.getName() : "");
         h.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onTicketClick(t);
         });
@@ -59,7 +61,7 @@ public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdap
     public int getItemCount() { return tickets.size(); }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvReference, tvTitle, tvStatus, tvPriority, tvDate;
+        TextView tvReference, tvTitle, tvStatus, tvPriority, tvDate, tvCategory;
         ViewHolder(@NonNull View v) {
             super(v);
             tvReference = v.findViewById(R.id.tv_ticket_reference);
@@ -67,6 +69,7 @@ public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdap
             tvStatus = v.findViewById(R.id.tv_ticket_status);
             tvPriority = v.findViewById(R.id.tv_ticket_priority);
             tvDate = v.findViewById(R.id.tv_ticket_date);
+            tvCategory = v.findViewById(R.id.tv_ticket_category);
         }
     }
 }
