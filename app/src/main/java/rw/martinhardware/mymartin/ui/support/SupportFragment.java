@@ -325,6 +325,13 @@ public class SupportFragment extends Fragment {
                 t.setPriority(j.optString("priority"));
                 t.setCreatedAt(j.optString("created_at"));
                 t.setDescription(j.optString("description"));
+                if (j.has("category") && !j.isNull("category")) {
+                    JSONObject c = j.getJSONObject("category");
+                    Ticket.Category cat = new Ticket.Category();
+                    cat.setId(c.optInt("id"));
+                    cat.setName(c.optString("name"));
+                    t.setCategory(cat);
+                }
                 list.add(t);
             }
         } catch (JSONException ignored) {}
