@@ -94,6 +94,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_vehicle_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -121,6 +122,7 @@
 
         <!-- Delivery Statistics -->
         <LinearLayout
+            android:id="@+id/ll_delivery_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
