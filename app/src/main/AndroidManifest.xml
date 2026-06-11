@@ -36,7 +36,8 @@
         <activity
             android:name=".ui.support.TicketDetailActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.MyMartin.NoActionBar">
         </activity>
 
     </application>
