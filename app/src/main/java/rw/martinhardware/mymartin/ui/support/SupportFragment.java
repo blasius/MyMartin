@@ -72,6 +72,7 @@ public class SupportFragment extends Fragment {
 
         binding.fabCreateTicket.setOnClickListener(v -> showCreateDialog());
         binding.btnCreateFromEmpty.setOnClickListener(v -> showCreateDialog());
+        binding.btnCreateHeader.setOnClickListener(v -> showCreateDialog());
         binding.btnRetry.setOnClickListener(v -> loadTickets());
 
         loadCategories();
@@ -115,6 +116,7 @@ public class SupportFragment extends Fragment {
     private void loadTickets() {
         binding.progressBar.setVisibility(View.VISIBLE);
         binding.emptyState.setVisibility(View.GONE);
+        binding.btnCreateHeader.setVisibility(View.GONE);
         binding.rvTickets.setVisibility(View.GONE);
 
         JsonObjectRequest request = new JsonObjectRequest(
@@ -129,6 +131,7 @@ public class SupportFragment extends Fragment {
                         binding.btnRetry.setVisibility(View.GONE);
                     } else {
                         adapter.setTickets(tickets);
+                        binding.btnCreateHeader.setVisibility(View.VISIBLE);
                         binding.rvTickets.setVisibility(View.VISIBLE);
                     }
                 },

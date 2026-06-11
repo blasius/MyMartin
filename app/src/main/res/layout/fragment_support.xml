@@ -55,12 +55,24 @@
 
         </LinearLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_create_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+ New Ticket"
+            android:visibility="gone"
+            app:cornerRadius="0dp"
+            app:backgroundTint="@color/theme_accent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:padding="12dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tickets"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingTop="8dp"
+            android:paddingTop="4dp"
             android:paddingBottom="88dp"
             android:visibility="gone" />
 
