@@ -29,6 +29,7 @@ import java.util.Map;
 
 import io.objectbox.Box;
 import rw.martinhardware.mymartin.MyApp;
+import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.FragmentSupportBinding;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
@@ -181,7 +182,7 @@ public class SupportFragment extends Fragment {
         android.widget.TextView tvCatLabel = new android.widget.TextView(requireContext());
         tvCatLabel.setText("Category *");
         tvCatLabel.setTextSize(14);
-        tvCatLabel.setTextColor(0xFF757575);
+        tvCatLabel.setTextColor(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.text_secondary));
         layout.addView(tvCatLabel);
 
         List<String> catNames = new ArrayList<>();
@@ -197,7 +198,7 @@ public class SupportFragment extends Fragment {
         android.widget.TextView tvPriLabel = new android.widget.TextView(requireContext());
         tvPriLabel.setText("Priority *");
         tvPriLabel.setTextSize(14);
-        tvPriLabel.setTextColor(0xFF757575);
+        tvPriLabel.setTextColor(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.text_secondary));
         layout.addView(tvPriLabel);
 
         android.widget.Spinner spinnerPriority = new android.widget.Spinner(requireContext());

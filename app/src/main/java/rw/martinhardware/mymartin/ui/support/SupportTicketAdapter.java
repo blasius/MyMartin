@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -46,10 +47,19 @@ public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdap
         Ticket t = tickets.get(pos);
         h.tvReference.setText(t.getReference() != null ? t.getReference() : "#" + t.getId());
         h.tvTitle.setText(t.getTitle());
-        h.tvStatus.setText(t.getStatus());
-        String priority = t.getPriority() != null ? t.getPriority().toUpperCase(Locale.ROOT) : "";
-        h.tvPriority.setText(priority);
         h.tvDate.setText(t.getCreatedAt());
+
+        Ticket.Category cat = t.getCategory();
+        h.tvCategory.setText(cat != null ? cat.getName() : "");
+
+        String status = t.getStatus() != null ? t.getStatus() : "";
+        h.tvStatus.setText(status.toUpperCase(Locale.ROOT));
+        h.tvStatus.setTextColor(ContextCompat.getColor(h.itemView.getContext(), statusColor(status)));
+
+        String priority = t.getPriority() != null ? t.getPriority() : "";
+        h.tvPriority.setText(priority.toUpperCase(Locale.ROOT));
+        h.tvPriority.setTextColor(ContextCompat.getColor(h.itemView.getContext(), priorityColor(priority)));
+
         h.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onTicketClick(t);
         });
@@ -58,8 +68,32 @@ public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdap
     @Override
     public int getItemCount() { return tickets.size(); }
 
+    private int statusColor(String status) {
+        if (status == null) return R.color.status_default;
+        switch (status.toLowerCase(Locale.ROOT)) {
+            case "open": return R.color.status_open;
+            case "in_progress": return R.color.status_progress;
+            case "pending": return R.color.status_pending;
+            case "resolved": return R.color.status_resolved;
+            case "closed": return R.color.status_closed;
+            default: return R.color.status_default;
+        }
+    }
+
+    private int priorityColor(String priority) {
+        if (priority == null) return R.color.text_secondary;
+        switch (priority.toLowerCase(Locale.ROOT)) {
+            case "high":
+            case "urgent": return R.color.priority_high;
+            case "medium":
+            case "normal": return R.color.priority_medium;
+            case "low": return R.color.priority_low;
+            default: return R.color.text_secondary;
+        }
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvReference, tvTitle, tvStatus, tvPriority, tvDate;
+        TextView tvReference, tvTitle, tvStatus, tvPriority, tvDate, tvCategory;
         ViewHolder(@NonNull View v) {
             super(v);
             tvReference = v.findViewById(R.id.tv_ticket_reference);
@@ -67,6 +101,7 @@ public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdap
             tvStatus = v.findViewById(R.id.tv_ticket_status);
             tvPriority = v.findViewById(R.id.tv_ticket_priority);
             tvDate = v.findViewById(R.id.tv_ticket_date);
+            tvCategory = v.findViewById(R.id.tv_ticket_category);
         }
     }
 }
