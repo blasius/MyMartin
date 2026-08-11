@@ -3,14 +3,14 @@ package rw.martinhardware.mymartin.auth;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MainActivity;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.viewmodel.AuthViewModel;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends BaseActivity {
 
     private AuthViewModel authViewModel;
 

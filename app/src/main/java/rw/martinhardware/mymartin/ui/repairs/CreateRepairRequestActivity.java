@@ -19,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -43,6 +42,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import io.objectbox.Box;
+import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.ActivityCreateRepairRequestBinding;
@@ -54,7 +54,7 @@ import rw.martinhardware.mymartin.models.RepairVehicle;
 import rw.martinhardware.mymartin.network.ApiConfig;
 import rw.martinhardware.mymartin.network.VolleySingleton;
 
-public class CreateRepairRequestActivity extends AppCompatActivity {
+public class CreateRepairRequestActivity extends BaseActivity {
 
     private static final int REQ_LOCATION = 100;
     private static final int REQ_CAMERA_PERM = 101;

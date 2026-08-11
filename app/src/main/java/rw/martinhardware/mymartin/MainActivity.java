@@ -3,7 +3,6 @@ package rw.martinhardware.mymartin;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,7 +15,7 @@ import rw.martinhardware.mymartin.databinding.ActivityMainBinding;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
 

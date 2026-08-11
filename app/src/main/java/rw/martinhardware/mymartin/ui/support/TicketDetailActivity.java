@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.objectbox.Box;
+import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.databinding.ActivityTicketDetailBinding;
 import rw.martinhardware.mymartin.entities.User;
@@ -29,7 +30,7 @@ import rw.martinhardware.mymartin.models.TicketMessage;
 import rw.martinhardware.mymartin.network.ApiConfig;
 import rw.martinhardware.mymartin.network.VolleySingleton;
 
-public class TicketDetailActivity extends AppCompatActivity {
+public class TicketDetailActivity extends BaseActivity {
 
     private ActivityTicketDetailBinding binding;
     private VolleySingleton volley;

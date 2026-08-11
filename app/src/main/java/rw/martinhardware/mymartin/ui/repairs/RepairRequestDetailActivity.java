@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
@@ -25,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import io.objectbox.Box;
+import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.ActivityRepairRequestDetailBinding;
@@ -35,7 +35,7 @@ import rw.martinhardware.mymartin.models.RepairRequest;
 import rw.martinhardware.mymartin.network.ApiConfig;
 import rw.martinhardware.mymartin.network.VolleySingleton;
 
-public class RepairRequestDetailActivity extends AppCompatActivity {
+public class RepairRequestDetailActivity extends BaseActivity {
 
     private ActivityRepairRequestDetailBinding binding;
     private VolleySingleton volley;
