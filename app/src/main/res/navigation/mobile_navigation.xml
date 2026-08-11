@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_repairs"
+        android:name="rw.martinhardware.mymartin.ui.repairs.RepairsFragment"
+        android:label="Repairs"
+        tools:layout="@layout/fragment_repairs" />
+
+    <fragment
         android:id="@+id/navigation_notifications"
         android:name="rw.martinhardware.mymartin.ui.notifications.NotificationsFragment"
         android:label="Notifications"

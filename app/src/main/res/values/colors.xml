@@ -55,4 +55,18 @@
     <color name="priority_high">#DC2626</color>
     <color name="priority_medium">#D97706</color>
     <color name="priority_low">#059669</color>
+
+    <!-- Repair request status -->
+    <color name="repair_status_draft">#6B7280</color>
+    <color name="repair_status_pending">#D97706</color>
+    <color name="repair_status_approved">#2563EB</color>
+    <color name="repair_status_in_progress">#7C3AED</color>
+    <color name="repair_status_completed">#059669</color>
+    <color name="repair_status_released">#059669</color>
+    <color name="repair_status_cancelled">#9CA3AF</color>
+
+    <!-- Workshop task status -->
+    <color name="task_status_assigned">#2563EB</color>
+    <color name="task_status_in_progress">#D97706</color>
+    <color name="task_status_completed">#059669</color>
 </resources>

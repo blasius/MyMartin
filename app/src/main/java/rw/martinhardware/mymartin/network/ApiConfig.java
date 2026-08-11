@@ -28,6 +28,37 @@ public class ApiConfig {
         return BASE_URL + "/mobile/support/tickets/" + ticketId + "/messages";
     }
 
+    // Repair request endpoints (driver side)
+    public static final String REPAIR_REQUESTS = BASE_URL + "/mobile/repair-requests";
+    public static final String REPAIR_VEHICLES = BASE_URL + "/mobile/repair-requests/vehicles";
+
+    public static String repairRequestDetail(int requestId) {
+        return BASE_URL + "/mobile/repair-requests/" + requestId;
+    }
+
+    public static String repairRequestSubmit(int requestId) {
+        return BASE_URL + "/mobile/repair-requests/" + requestId + "/submit";
+    }
+
+    public static String repairRequestCancel(int requestId) {
+        return BASE_URL + "/mobile/repair-requests/" + requestId + "/cancel";
+    }
+
+    // Workshop (mechanic) endpoints
+    public static final String WORKSHOP_MY_TASKS = BASE_URL + "/mobile/workshop/my-tasks";
+
+    public static String workshopTaskDetail(int assignmentId) {
+        return BASE_URL + "/mobile/workshop/tasks/" + assignmentId;
+    }
+
+    public static String workshopTaskStart(int assignmentId) {
+        return BASE_URL + "/mobile/workshop/tasks/" + assignmentId + "/start";
+    }
+
+    public static String workshopTaskComplete(int assignmentId) {
+        return BASE_URL + "/mobile/workshop/tasks/" + assignmentId + "/complete";
+    }
+
     // Helper method to get current environment
     public static String getCurrentEnvironment() {
         return BuildConfig.DEBUG ? "Development" : "Production";
