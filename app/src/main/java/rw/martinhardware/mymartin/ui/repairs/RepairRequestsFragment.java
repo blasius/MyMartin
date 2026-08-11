@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +43,7 @@ public class RepairRequestsFragment extends Fragment {
 
     private final List<RepairRequest> allRequests = new ArrayList<>();
     private RepairRequestAdapter adapter;
+    private int currentRequestId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,12 +70,59 @@ public class RepairRequestsFragment extends Fragment {
 
         binding.fabNewRequest.setOnClickListener(v ->
                 startActivity(new Intent(getContext(), CreateRepairRequestActivity.class)));
+        binding.bannerCurrent.setOnClickListener(v -> openCurrentRequest());
         binding.btnRetry.setOnClickListener(v -> loadRequests());
         binding.filterGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             if (isChecked) applyFilter();
         });
 
         loadRequests();
+        loadCurrentBanner();
+    }
+
+    private void openCurrentRequest() {
+        if (currentRequestId <= 0) return;
+        Intent intent = new Intent(getContext(), RepairRequestDetailActivity.class);
+        intent.putExtra("request_id", currentRequestId);
+        startActivity(intent);
+    }
+
+    private void loadCurrentBanner() {
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, ApiConfig.REPAIR_CURRENT, null,
+                response -> {
+                    JSONObject data = response.optJSONObject("data");
+                    if (data == null) data = response;
+                    if (data.length() == 0) {
+                        binding.bannerCurrent.setVisibility(View.GONE);
+                        return;
+                    }
+                    currentRequestId = data.optInt("id");
+                    StringBuilder subtitle = new StringBuilder();
+                    String ref = data.optString("reference");
+                    if (!ref.isEmpty()) subtitle.append(ref);
+                    if (data.has("vehicle") && !data.isNull("vehicle")) {
+                        JSONObject v = data.optJSONObject("vehicle");
+                        String plate = v != null ? v.optString("plate_number") : "";
+                        if (!plate.isEmpty()) {
+                            if (subtitle.length() > 0) subtitle.append("  •  ");
+                            subtitle.append(plate);
+                        }
+                    }
+                    binding.tvBannerSubtitle.setText(subtitle.toString());
+                    binding.bannerCurrent.setVisibility(View.VISIBLE);
+                },
+                error -> binding.bannerCurrent.setVisibility(View.GONE)
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> h = new HashMap<>();
+                h.put("Accept", "application/json");
+                if (token != null) h.put("Authorization", "Bearer " + token);
+                return h;
+            }
+        };
+        volley.addToRequestQueue(request);
     }
 
     private void loadRequests() {
@@ -82,12 +130,13 @@ public class RepairRequestsFragment extends Fragment {
         binding.emptyState.setVisibility(View.GONE);
         binding.rvRequests.setVisibility(View.GONE);
 
-        JsonArrayRequest request = new JsonArrayRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, ApiConfig.REPAIR_REQUESTS, null,
                 response -> {
                     binding.progressBar.setVisibility(View.GONE);
                     allRequests.clear();
-                    allRequests.addAll(parseRequests(response));
+                    JSONArray arr = response.optJSONArray("data");
+                    allRequests.addAll(parseRequests(arr != null ? arr : new JSONArray()));
                     if (allRequests.isEmpty()) {
                         binding.emptyState.setVisibility(View.VISIBLE);
                         binding.btnRetry.setVisibility(View.GONE);
@@ -157,6 +206,7 @@ public class RepairRequestsFragment extends Fragment {
                 r.setStatus(j.optString("status"));
                 r.setDescription(j.optString("description"));
                 r.setCreatedAt(j.optString("created_at"));
+                r.setSubmittedAt(j.isNull("submitted_at") ? null : j.optString("submitted_at"));
 
                 if (j.has("vehicle") && !j.isNull("vehicle")) {
                     JSONObject v = j.getJSONObject("vehicle");

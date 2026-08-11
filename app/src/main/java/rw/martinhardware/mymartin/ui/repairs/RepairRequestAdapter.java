@@ -46,7 +46,7 @@ public class RepairRequestAdapter extends RecyclerView.Adapter<RepairRequestAdap
     public void onBindViewHolder(@NonNull ViewHolder h, int pos) {
         RepairRequest r = requests.get(pos);
         h.tvReference.setText(r.getReference() != null ? r.getReference() : "#" + r.getId());
-        h.tvDate.setText(r.getCreatedAt());
+        h.tvDate.setText(r.getSubmittedAt() != null ? r.getSubmittedAt() : r.getCreatedAt());
         h.tvDescription.setText(r.getDescription());
 
         RepairRequest.Vehicle v = r.getVehicle();

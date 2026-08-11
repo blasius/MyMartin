@@ -11,10 +11,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -50,6 +55,7 @@ import rw.martinhardware.mymartin.databinding.ItemAddedPhotoBinding;
 import rw.martinhardware.mymartin.databinding.ItemLineItemBinding;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
+import rw.martinhardware.mymartin.models.RepairItem;
 import rw.martinhardware.mymartin.models.RepairVehicle;
 import rw.martinhardware.mymartin.network.ApiConfig;
 import rw.martinhardware.mymartin.network.VolleySingleton;
@@ -66,6 +72,7 @@ public class CreateRepairRequestActivity extends BaseActivity {
 
     private final List<RepairVehicle> vehicles = new ArrayList<>();
     private final List<View> itemRows = new ArrayList<>();
+    private final Map<View, RepairItem.Part> rowParts = new HashMap<>();
     private final List<Uri> photoUris = new ArrayList<>();
     private Uri pendingPhotoUri;
 
@@ -143,11 +150,116 @@ public class CreateRepairRequestActivity extends BaseActivity {
         ItemLineItemBinding rowBinding = ItemLineItemBinding.inflate(getLayoutInflater());
         rowBinding.btnRemoveItem.setOnClickListener(v -> {
             itemRows.remove(rowBinding.getRoot());
+            rowParts.remove(rowBinding.getRoot());
             binding.llItems.removeView(rowBinding.getRoot());
         });
+        rowBinding.btnPickPart.setOnClickListener(v -> pickPart(rowBinding));
         itemRows.add(rowBinding.getRoot());
         binding.llItems.addView(rowBinding.getRoot());
         binding.tvItemsHint.setVisibility(View.GONE);
+    }
+
+    private void pickPart(ItemLineItemBinding rowBinding) {
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(48, 16, 48, 8);
+
+        com.google.android.material.textfield.TextInputEditText search =
+                new com.google.android.material.textfield.TextInputEditText(this);
+        search.setHint("Search parts");
+        search.setSingleLine(true);
+        layout.addView(search);
+
+        ProgressBar progress = new ProgressBar(this);
+        progress.setVisibility(View.GONE);
+        layout.addView(progress);
+
+        ListView list = new ListView(this);
+        list.setDivider(null);
+        list.setDividerHeight(0);
+        layout.addView(list);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Attach part")
+                .setView(layout)
+                .setNeutralButton("Clear part", (d, w) -> {
+                    rowParts.remove(rowBinding.getRoot());
+                    rowBinding.tvSelectedPart.setText("No part selected");
+                    rowBinding.tvSelectedPart.setTextColor(ContextCompat.getColor(this, R.color.text_muted));
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, new ArrayList<>());
+        list.setAdapter(listAdapter);
+
+        final ArrayList<RepairItem.Part> results = new ArrayList<>();
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) {}
+            @Override public void onTextChanged(CharSequence s, int a, int b, int c) {}
+            @Override public void afterTextChanged(Editable s) {
+                String q = s.toString().trim();
+                results.clear();
+                listAdapter.clear();
+                volley.getRequestQueue().cancelAll("parts_search");
+                if (q.isEmpty()) {
+                    progress.setVisibility(View.GONE);
+                    return;
+                }
+                progress.setVisibility(View.VISIBLE);
+                JsonArrayRequest req = new JsonArrayRequest(
+                        Request.Method.GET, ApiConfig.repairParts(q), null,
+                        response -> {
+                            progress.setVisibility(View.GONE);
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject j = response.getJSONObject(i);
+                                    RepairItem.Part part = new RepairItem.Part();
+                                    part.setId(j.optInt("id"));
+                                    part.setName(j.optString("name"));
+                                    part.setSku(j.optString("sku"));
+                                    part.setUnitPrice(j.optDouble("unit_price", 0));
+                                    part.setUnitOfMeasure(j.optString("unit_of_measure"));
+                                    results.add(part);
+                                    String label = part.getName();
+                                    if (part.getSku() != null && !part.getSku().isEmpty()) label += " (" + part.getSku() + ")";
+                                    listAdapter.add(label);
+                                } catch (JSONException ignored) {}
+                            }
+                        },
+                        error -> {
+                            progress.setVisibility(View.GONE);
+                            Toast.makeText(CreateRepairRequestActivity.this, "Failed to search parts", Toast.LENGTH_SHORT).show();
+                        }
+                ) {
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> h = new HashMap<>();
+                        h.put("Accept", "application/json");
+                        if (token != null) h.put("Authorization", "Bearer " + token);
+                        return h;
+                    }
+                };
+                req.setTag("parts_search");
+                volley.addToRequestQueue(req);
+            }
+        });
+
+        list.setOnItemClickListener((parent, view, position, id) -> {
+            if (position < results.size()) {
+                RepairItem.Part part = results.get(position);
+                rowParts.put(rowBinding.getRoot(), part);
+                String label = part.getName();
+                if (part.getSku() != null && !part.getSku().isEmpty()) label += " (" + part.getSku() + ")";
+                rowBinding.tvSelectedPart.setText("Part: " + label);
+                rowBinding.tvSelectedPart.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+            }
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
     private void requestCamera() {
@@ -293,6 +405,8 @@ public class CreateRepairRequestActivity extends BaseActivity {
                 if (desc.isEmpty()) continue;
                 JSONObject item = new JSONObject();
                 item.put("description", desc);
+                RepairItem.Part part = rowParts.get(row);
+                if (part != null) item.put("part_id", part.getId());
                 double qty = parseDoubleSafe(rb.etItemQty.getText().toString(), 1.0);
                 double price = parseDoubleSafe(rb.etItemPrice.getText().toString(), 0.0);
                 item.put("estimated_quantity", qty);
@@ -310,6 +424,11 @@ public class CreateRepairRequestActivity extends BaseActivity {
                 Request.Method.POST, ApiConfig.REPAIR_REQUESTS, body,
                 response -> {
                     Toast.makeText(this, "Repair request created", Toast.LENGTH_SHORT).show();
+                    JSONObject data = response.optJSONObject("data");
+                    int createdId = data != null ? data.optInt("id") : response.optInt("id");
+                    Intent intent = new Intent(this, RepairRequestDetailActivity.class);
+                    intent.putExtra("request_id", createdId);
+                    startActivity(intent);
                     finish();
                 },
                 error -> {

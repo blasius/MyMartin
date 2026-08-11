@@ -13,6 +13,7 @@ public class RepairRequest {
     private double longitude;
     private String createdAt;
     private String updatedAt;
+    private String submittedAt;
     private Vehicle vehicle;
     private Driver driver;
     private List<RepairItem> items;
@@ -40,6 +41,8 @@ public class RepairRequest {
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
     public String getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
+    public String getSubmittedAt() { return submittedAt; }
+    public void setSubmittedAt(String submittedAt) { this.submittedAt = submittedAt; }
     public Vehicle getVehicle() { return vehicle; }
     public void setVehicle(Vehicle vehicle) { this.vehicle = vehicle; }
     public Driver getDriver() { return driver; }

@@ -356,6 +356,7 @@ public class RepairRequestDetailActivity extends BaseActivity {
         r.setDescription(data.optString("description"));
         r.setCreatedAt(data.optString("created_at"));
         r.setUpdatedAt(data.optString("updated_at"));
+        r.setSubmittedAt(data.isNull("submitted_at") ? null : data.optString("submitted_at"));
         r.setLatitude(data.optDouble("latitude", 0));
         r.setLongitude(data.optDouble("longitude", 0));
 

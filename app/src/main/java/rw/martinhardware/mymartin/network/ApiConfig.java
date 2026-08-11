@@ -1,5 +1,7 @@
 package rw.martinhardware.mymartin.network;
 
+import android.net.Uri;
+
 import rw.martinhardware.mymartin.BuildConfig;
 
 public class ApiConfig {
@@ -31,6 +33,12 @@ public class ApiConfig {
     // Repair request endpoints (driver side)
     public static final String REPAIR_REQUESTS = BASE_URL + "/mobile/repair-requests";
     public static final String REPAIR_VEHICLES = BASE_URL + "/mobile/repair-requests/vehicles";
+    public static final String REPAIR_CURRENT = BASE_URL + "/mobile/repair-requests/current";
+
+    public static String repairParts(String query) {
+        String q = Uri.encode(query == null ? "" : query);
+        return BASE_URL + "/mobile/repair-requests/parts?q=" + q;
+    }
 
     public static String repairRequestDetail(int requestId) {
         return BASE_URL + "/mobile/repair-requests/" + requestId;

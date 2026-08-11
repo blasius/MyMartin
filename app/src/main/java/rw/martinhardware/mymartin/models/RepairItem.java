@@ -37,11 +37,17 @@ public class RepairItem {
         private int id;
         private String name;
         private String sku;
+        private double unitPrice;
+        private String unitOfMeasure;
         public int getId() { return id; }
         public void setId(int id) { this.id = id; }
         public String getName() { return name; }
         public void setName(String name) { this.name = name; }
         public String getSku() { return sku; }
         public void setSku(String sku) { this.sku = sku; }
+        public double getUnitPrice() { return unitPrice; }
+        public void setUnitPrice(double unitPrice) { this.unitPrice = unitPrice; }
+        public String getUnitOfMeasure() { return unitOfMeasure; }
+        public void setUnitOfMeasure(String unitOfMeasure) { this.unitOfMeasure = unitOfMeasure; }
     }
 }
