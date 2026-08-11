@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -75,6 +76,10 @@ public class CreateRepairRequestActivity extends BaseActivity {
     private final Map<View, RepairItem.Part> rowParts = new HashMap<>();
     private final List<Uri> photoUris = new ArrayList<>();
     private Uri pendingPhotoUri;
+    private boolean vehiclesLoaded;
+    private boolean locationSubmitted;
+    private final Handler locationHandler = new Handler(Looper.getMainLooper());
+    private Runnable locationTimeout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +109,7 @@ public class CreateRepairRequestActivity extends BaseActivity {
 
     private void loadVehicles() {
         binding.btnSubmit.setEnabled(false);
+        vehiclesLoaded = false;
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET, ApiConfig.REPAIR_VEHICLES, null,
                 response -> {
@@ -118,9 +124,13 @@ public class CreateRepairRequestActivity extends BaseActivity {
                             vehicles.add(v);
                         } catch (JSONException ignored) {}
                     }
+                    vehiclesLoaded = true;
                     populateVehicleSpinner();
                 },
-                error -> Toast.makeText(this, "Failed to load vehicles", Toast.LENGTH_SHORT).show()
+                error -> {
+                    binding.btnSubmit.setEnabled(true);
+                    Toast.makeText(this, "Failed to load vehicles. Try again.", Toast.LENGTH_SHORT).show();
+                }
         ) {
             @Override
             public Map<String, String> getHeaders() {
@@ -318,6 +328,11 @@ public class CreateRepairRequestActivity extends BaseActivity {
     }
 
     private void onSubmitClicked() {
+        if (!vehiclesLoaded) {
+            Toast.makeText(this, "Loading vehicles\u2026 try again in a moment", Toast.LENGTH_SHORT).show();
+            loadVehicles();
+            return;
+        }
         String description = binding.etDescription.getText().toString().trim();
         if (description.isEmpty()) {
             Toast.makeText(this, "Description is required", Toast.LENGTH_SHORT).show();
@@ -357,6 +372,7 @@ public class CreateRepairRequestActivity extends BaseActivity {
 
     private void getLocationAndSubmit() {
         binding.btnSubmit.setEnabled(false);
+        locationSubmitted = false;
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
         Location last = null;
         try {
@@ -374,20 +390,31 @@ public class CreateRepairRequestActivity extends BaseActivity {
             return;
         }
 
+        Toast.makeText(this, "Getting your location\u2026", Toast.LENGTH_SHORT).show();
+        locationTimeout = () -> {
+            if (!locationSubmitted) submitRequest(Double.NaN, Double.NaN);
+        };
+        locationHandler.postDelayed(locationTimeout, 12000);
+
         try {
             lm.requestSingleUpdate(LocationManager.GPS_PROVIDER, location -> {
-                if (location != null) {
-                    submitRequest(location.getLatitude(), location.getLongitude());
-                } else {
-                    submitRequest(Double.NaN, Double.NaN);
+                if (!locationSubmitted) {
+                    locationHandler.removeCallbacks(locationTimeout);
+                    submitRequest(location != null ? location.getLatitude() : Double.NaN,
+                            location != null ? location.getLongitude() : Double.NaN);
                 }
             }, Looper.getMainLooper());
         } catch (SecurityException e) {
-            submitRequest(Double.NaN, Double.NaN);
+            if (!locationSubmitted) {
+                locationHandler.removeCallbacks(locationTimeout);
+                submitRequest(Double.NaN, Double.NaN);
+            }
         }
     }
 
     private void submitRequest(double latitude, double longitude) {
+        locationSubmitted = true;
+        if (locationTimeout != null) locationHandler.removeCallbacks(locationTimeout);
         JSONObject body = new JSONObject();
         try {
             RepairVehicle vehicle = vehicles.get(binding.spinnerVehicle.getSelectedItemPosition());
