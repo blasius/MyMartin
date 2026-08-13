@@ -3,8 +3,16 @@ package rw.martinhardware.mymartin;
 import android.app.Application;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import java.util.concurrent.TimeUnit;
 
 import io.objectbox.BoxStore;
+import rw.martinhardware.mymartin.data.HomeSyncWorker;
 import rw.martinhardware.mymartin.entities.MyObjectBox;
 
 public class MyApp extends Application {
@@ -16,6 +24,20 @@ public class MyApp extends Application {
         super.onCreate();
         boxStore = MyObjectBox.builder().androidContext(this).build();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Disable dark mode
+        scheduleHomeSync();
+    }
+
+    private void scheduleHomeSync() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+        PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(HomeSyncWorker.class, 15, TimeUnit.MINUTES)
+                .setConstraints(constraints)
+                .build();
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                HomeSyncWorker.WORK_NAME,
+                ExistingPeriodicWorkPolicy.KEEP,
+                request);
     }
 
     public BoxStore getBoxStore() {

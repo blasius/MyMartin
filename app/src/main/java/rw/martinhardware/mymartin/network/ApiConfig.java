@@ -30,6 +30,9 @@ public class ApiConfig {
         return BASE_URL + "/mobile/support/tickets/" + ticketId + "/messages";
     }
 
+    // Driver home (trips) endpoints
+    public static final String TRIP_CURRENT = BASE_URL + "/mobile/trips/current";
+
     // Repair request endpoints (driver side)
     public static final String REPAIR_REQUESTS = BASE_URL + "/mobile/repair-requests";
     public static final String REPAIR_VEHICLES = BASE_URL + "/mobile/repair-requests/vehicles";
