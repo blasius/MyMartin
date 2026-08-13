@@ -26,6 +26,7 @@ import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.ActivityWorkshopTaskDetailBinding;
+import rw.martinhardware.mymartin.util.DateUtils;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.models.RepairItem;
@@ -112,9 +113,9 @@ public class WorkshopTaskDetailActivity extends BaseActivity {
         binding.tvDuration.setText(a.getDuration() != null ? "Duration: " + a.getDuration() : "");
 
         StringBuilder dates = new StringBuilder();
-        if (a.getAssignedAt() != null) dates.append("Assigned: ").append(a.getAssignedAt());
-        if (a.getStartedAt() != null) dates.append("\nStarted: ").append(a.getStartedAt());
-        if (a.getCompletedAt() != null) dates.append("\nCompleted: ").append(a.getCompletedAt());
+        if (a.getAssignedAt() != null) dates.append("Assigned: ").append(DateUtils.dateTime(a.getAssignedAt()));
+        if (a.getStartedAt() != null) dates.append("\nStarted: ").append(DateUtils.dateTime(a.getStartedAt()));
+        if (a.getCompletedAt() != null) dates.append("\nCompleted: ").append(DateUtils.dateTime(a.getCompletedAt()));
         binding.tvDates.setText(dates.toString().trim());
 
         if (a.getCompletedNote() != null && !a.getCompletedNote().isEmpty()) {

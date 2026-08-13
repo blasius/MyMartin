@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.models.RepairTask;
+import rw.martinhardware.mymartin.util.DateUtils;
 
 public class WorkshopTaskAdapter extends RecyclerView.Adapter<WorkshopTaskAdapter.ViewHolder> {
 
@@ -49,7 +50,7 @@ public class WorkshopTaskAdapter extends RecyclerView.Adapter<WorkshopTaskAdapte
         h.tvVehicle.setText(t.getVehiclePlate());
         h.tvInstructions.setText(t.getInstructions());
         h.tvDuration.setText(t.getDuration() != null ? t.getDuration() : "");
-        h.tvDate.setText(t.getAssignedAt());
+        h.tvDate.setText(DateUtils.date(t.getAssignedAt()));
 
         String status = t.getStatus() != null ? t.getStatus() : "";
         h.tvStatus.setText(status.toUpperCase(Locale.ROOT).replace('_', ' '));

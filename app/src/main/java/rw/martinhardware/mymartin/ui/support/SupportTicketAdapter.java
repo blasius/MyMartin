@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.models.Ticket;
+import rw.martinhardware.mymartin.util.DateUtils;
 
 public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdapter.ViewHolder> {
 
@@ -47,7 +48,7 @@ public class SupportTicketAdapter extends RecyclerView.Adapter<SupportTicketAdap
         Ticket t = tickets.get(pos);
         h.tvReference.setText(t.getReference() != null ? t.getReference() : "#" + t.getId());
         h.tvTitle.setText(t.getTitle());
-        h.tvDate.setText(t.getCreatedAt());
+        h.tvDate.setText(DateUtils.date(t.getCreatedAt()));
 
         Ticket.Category cat = t.getCategory();
         h.tvCategory.setText(cat != null ? cat.getName() : "");

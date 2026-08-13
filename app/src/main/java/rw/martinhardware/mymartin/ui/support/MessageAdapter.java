@@ -15,6 +15,7 @@ import java.util.List;
 
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.models.TicketMessage;
+import rw.martinhardware.mymartin.util.DateUtils;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
@@ -37,7 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder h, int pos) {
         TicketMessage m = messages.get(pos);
         h.tvMessage.setText(m.getMessage());
-        h.tvTime.setText(m.getCreatedAt());
+        h.tvTime.setText(DateUtils.time(m.getCreatedAt()));
 
         boolean isUser = m.getAuthor() != null && "user".equals(m.getAuthor().getType());
 

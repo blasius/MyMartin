@@ -23,6 +23,7 @@ import io.objectbox.Box;
 import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.databinding.ActivityTicketDetailBinding;
+import rw.martinhardware.mymartin.util.DateUtils;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.models.Ticket;
@@ -104,7 +105,7 @@ public class TicketDetailActivity extends BaseActivity {
                                 String actor = e.getActor() != null ? e.getActor().getName() : "System";
                                 events.append("• ").append(actor).append(" - ").append(e.getType());
                                 if (e.getCreatedAt() != null) {
-                                    events.append(" (").append(e.getCreatedAt()).append(")");
+                                    events.append(" (").append(DateUtils.dateTime(e.getCreatedAt())).append(")");
                                 }
                                 events.append("\n");
                             }

@@ -28,6 +28,7 @@ import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.ActivityRepairRequestDetailBinding;
+import rw.martinhardware.mymartin.util.DateUtils;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.models.RepairItem;
@@ -223,7 +224,7 @@ public class RepairRequestDetailActivity extends BaseActivity {
             if (a.getActorName() != null) sb.append(" — ").append(a.getActorName());
             if (a.getStatus() != null) sb.append("\nStatus: ").append(a.getStatus());
             if (a.getComment() != null && !a.getComment().isEmpty()) sb.append("\nComment: ").append(a.getComment());
-            if (a.getCreatedAt() != null) sb.append("\n").append(a.getCreatedAt());
+            if (a.getCreatedAt() != null) sb.append("\n").append(DateUtils.dateTime(a.getCreatedAt()));
             addInfoRow(binding.approvalsContainer, sb.toString().trim(), false);
         }
     }
@@ -241,7 +242,7 @@ public class RepairRequestDetailActivity extends BaseActivity {
             if (a.getMechanicName() != null) sb.append(a.getMechanicName());
             if (a.getStatus() != null) sb.append("  •  ").append(a.getStatus());
             if (a.getInstructions() != null) sb.append("\n").append(a.getInstructions());
-            if (a.getAssignedAt() != null) sb.append("\nAssigned: ").append(a.getAssignedAt());
+            if (a.getAssignedAt() != null) sb.append("\nAssigned: ").append(DateUtils.dateTime(a.getAssignedAt()));
             if (a.getCompletedNote() != null) sb.append("\nNote: ").append(a.getCompletedNote());
             addInfoRow(binding.assignmentsContainer, sb.toString().trim(), false);
         }
@@ -259,7 +260,7 @@ public class RepairRequestDetailActivity extends BaseActivity {
         if (release.getOdometerAtRelease() != null) sb.append("\nOdometer: ").append(release.getOdometerAtRelease());
         if (release.getUnresolvedIssues() != null && !release.getUnresolvedIssues().isEmpty())
             sb.append("\nUnresolved issues: ").append(release.getUnresolvedIssues());
-        if (release.getReleasedAt() != null) sb.append("\nReleased: ").append(release.getReleasedAt());
+        if (release.getReleasedAt() != null) sb.append("\nReleased: ").append(DateUtils.dateTime(release.getReleasedAt()));
         binding.tvReleaseInfo.setText(sb.toString());
     }
 
