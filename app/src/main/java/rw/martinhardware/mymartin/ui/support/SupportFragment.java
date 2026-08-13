@@ -31,6 +31,7 @@ import io.objectbox.Box;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.FragmentSupportBinding;
+import rw.martinhardware.mymartin.util.AnalyticsHelper;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.models.Ticket;
@@ -274,6 +275,7 @@ public class SupportFragment extends Fragment {
                 Request.Method.POST, ApiConfig.SUPPORT_TICKETS, body,
                 response -> {
                     Toast.makeText(getContext(), "Ticket created", Toast.LENGTH_SHORT).show();
+                    if (getContext() != null) AnalyticsHelper.logEvent(getContext(), "support_ticket_created");
                     loadTickets();
                 },
                 error -> {

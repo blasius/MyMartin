@@ -9,6 +9,7 @@ import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MainActivity;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.viewmodel.AuthViewModel;
+import rw.martinhardware.mymartin.util.AnalyticsHelper;
 
 public class AuthActivity extends BaseActivity {
 
@@ -24,6 +25,7 @@ public class AuthActivity extends BaseActivity {
         // Observe auth state
         authViewModel.getAuthState().observe(this, authState -> {
             if (authState == AuthViewModel.AuthState.AUTHENTICATED) {
+                AnalyticsHelper.logEvent(this, "login_success");
                 // Navigate to MainActivity
                 Intent intent = new Intent(AuthActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

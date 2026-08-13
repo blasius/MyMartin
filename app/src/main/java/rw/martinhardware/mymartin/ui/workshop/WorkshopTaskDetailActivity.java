@@ -27,6 +27,7 @@ import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.ActivityWorkshopTaskDetailBinding;
 import rw.martinhardware.mymartin.util.DateUtils;
+import rw.martinhardware.mymartin.util.AnalyticsHelper;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.models.RepairItem;
@@ -188,6 +189,7 @@ public class WorkshopTaskDetailActivity extends BaseActivity {
                 Request.Method.POST, ApiConfig.workshopTaskStart(assignmentId), null,
                 response -> {
                     Toast.makeText(this, "Work started", Toast.LENGTH_SHORT).show();
+                    AnalyticsHelper.logEvent(this, "workshop_task_started");
                     loadDetail();
                 },
                 error -> {
@@ -243,6 +245,7 @@ public class WorkshopTaskDetailActivity extends BaseActivity {
                 Request.Method.POST, ApiConfig.workshopTaskComplete(assignmentId), body,
                 response -> {
                     Toast.makeText(this, "Work completed", Toast.LENGTH_SHORT).show();
+                    AnalyticsHelper.logEvent(this, "workshop_task_completed");
                     loadDetail();
                 },
                 error -> {

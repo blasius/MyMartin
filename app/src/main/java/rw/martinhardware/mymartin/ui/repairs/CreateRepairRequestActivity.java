@@ -60,6 +60,7 @@ import rw.martinhardware.mymartin.models.RepairItem;
 import rw.martinhardware.mymartin.models.RepairVehicle;
 import rw.martinhardware.mymartin.network.ApiConfig;
 import rw.martinhardware.mymartin.network.VolleySingleton;
+import rw.martinhardware.mymartin.util.AnalyticsHelper;
 
 public class CreateRepairRequestActivity extends BaseActivity {
 
@@ -451,6 +452,7 @@ public class CreateRepairRequestActivity extends BaseActivity {
                 Request.Method.POST, ApiConfig.REPAIR_REQUESTS, body,
                 response -> {
                     Toast.makeText(this, "Repair request created", Toast.LENGTH_SHORT).show();
+                    AnalyticsHelper.logEvent(this, "repair_request_created");
                     JSONObject data = response.optJSONObject("data");
                     int createdId = data != null ? data.optInt("id") : response.optInt("id");
                     Intent intent = new Intent(this, RepairRequestDetailActivity.class);

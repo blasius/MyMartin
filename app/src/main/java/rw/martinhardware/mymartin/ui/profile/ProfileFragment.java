@@ -18,6 +18,7 @@ import rw.martinhardware.mymartin.databinding.FragmentProfileBinding;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.viewmodel.AuthViewModel;
+import rw.martinhardware.mymartin.util.AnalyticsHelper;
 
 public class ProfileFragment extends Fragment {
 
@@ -81,6 +82,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logout() {
+        AnalyticsHelper.logEvent(requireContext(), "logout");
         authViewModel.logout();
     }
 

@@ -29,6 +29,7 @@ import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.R;
 import rw.martinhardware.mymartin.databinding.ActivityRepairRequestDetailBinding;
 import rw.martinhardware.mymartin.util.DateUtils;
+import rw.martinhardware.mymartin.util.AnalyticsHelper;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.models.RepairItem;
@@ -282,6 +283,7 @@ public class RepairRequestDetailActivity extends BaseActivity {
                 Request.Method.POST, ApiConfig.repairRequestSubmit(requestId), null,
                 response -> {
                     Toast.makeText(this, "Request submitted", Toast.LENGTH_SHORT).show();
+                    AnalyticsHelper.logEvent(this, "repair_request_submitted");
                     loadDetail();
                 },
                 error -> {
@@ -316,6 +318,7 @@ public class RepairRequestDetailActivity extends BaseActivity {
                 Request.Method.POST, ApiConfig.repairRequestCancel(requestId), null,
                 response -> {
                     Toast.makeText(this, "Request cancelled", Toast.LENGTH_SHORT).show();
+                    AnalyticsHelper.logEvent(this, "repair_request_cancelled");
                     loadDetail();
                 },
                 error -> {

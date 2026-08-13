@@ -24,6 +24,7 @@ import rw.martinhardware.mymartin.BaseActivity;
 import rw.martinhardware.mymartin.MyApp;
 import rw.martinhardware.mymartin.databinding.ActivityTicketDetailBinding;
 import rw.martinhardware.mymartin.util.DateUtils;
+import rw.martinhardware.mymartin.util.AnalyticsHelper;
 import rw.martinhardware.mymartin.entities.User;
 import rw.martinhardware.mymartin.entities.User_;
 import rw.martinhardware.mymartin.models.Ticket;
@@ -153,6 +154,7 @@ public class TicketDetailActivity extends BaseActivity {
                 response -> {
                     binding.etMessage.setText("");
                     binding.btnSend.setEnabled(true);
+                    AnalyticsHelper.logEvent(this, "support_message_sent");
                     loadTicketDetail();
                 },
                 error -> {
