@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.objectbox.BoxStore;
 import rw.martinhardware.mymartin.data.HomeSyncWorker;
+import rw.martinhardware.mymartin.data.ProfileSyncWorker;
 import rw.martinhardware.mymartin.entities.MyObjectBox;
 
 public class MyApp extends Application {
@@ -25,6 +26,7 @@ public class MyApp extends Application {
         boxStore = MyObjectBox.builder().androidContext(this).build();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Disable dark mode
         scheduleHomeSync();
+        scheduleProfileSync();
     }
 
     private void scheduleHomeSync() {
@@ -36,6 +38,19 @@ public class MyApp extends Application {
                 .build();
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
                 HomeSyncWorker.WORK_NAME,
+                ExistingPeriodicWorkPolicy.KEEP,
+                request);
+    }
+
+    private void scheduleProfileSync() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+        PeriodicWorkRequest request = new PeriodicWorkRequest.Builder(ProfileSyncWorker.class, 15, TimeUnit.MINUTES)
+                .setConstraints(constraints)
+                .build();
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                ProfileSyncWorker.WORK_NAME,
                 ExistingPeriodicWorkPolicy.KEEP,
                 request);
     }

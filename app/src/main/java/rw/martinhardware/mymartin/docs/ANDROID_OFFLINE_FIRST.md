@@ -4,7 +4,11 @@ The app is **offline-first**: every screen renders from a local ObjectBox cache 
 refreshes in the background. Screens never depend on the network to show content.
 
 The driver home screen (`HomeFragment` + `DriverHomeRepository` + `HomeSnapshot` + `HomeSyncWorker`)
-is the reference implementation. Follow it for all future screens.
+is the reference implementation. The driver profile screen (`ProfileFragment` +
+`DriverProfileRepository` + `DriverProfile`/`DriverTrip` + `ProfileSyncWorker`) follows the same
+pattern with a small twist: its `latest_trips` list is persisted as a **second entity**
+(`DriverTrip`, keyed by `driverId`, replaced wholesale each sync) rather than a JSON blob. Follow
+both for all future screens.
 
 ## Principles
 

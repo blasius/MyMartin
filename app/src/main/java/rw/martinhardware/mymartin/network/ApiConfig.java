@@ -33,6 +33,9 @@ public class ApiConfig {
     // Driver home (trips) endpoints
     public static final String TRIP_CURRENT = BASE_URL + "/mobile/trips/current";
 
+    // Driver profile endpoint
+    public static final String PROFILE = BASE_URL + "/mobile/profile";
+
     // Repair request endpoints (driver side)
     public static final String REPAIR_REQUESTS = BASE_URL + "/mobile/repair-requests";
     public static final String REPAIR_VEHICLES = BASE_URL + "/mobile/repair-requests/vehicles";
